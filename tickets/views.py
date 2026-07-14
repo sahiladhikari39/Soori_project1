@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 
 from .models import Ticket
@@ -16,3 +15,6 @@ class TicketViewSet(viewsets.ModelViewSet):
         if client_id:
             qs = qs.filter(client_id=client_id)
         return qs
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
