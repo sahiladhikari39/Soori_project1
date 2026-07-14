@@ -9,5 +9,6 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = ['id', 'client', 'client_name', 'title', 'description', 'created_by', 'created_by_username', 'created_at']
+        read_only_fields = ["created_by", "client"]
 
     
