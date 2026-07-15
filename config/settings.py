@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'accounts',
     'clients',
     'tickets',
 ]
@@ -124,9 +125,21 @@ STATIC_URL = 'static/'
 # and 2 work without ever logging in.
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
+        # SessionAuthentication reuses Django's normal login (the same
+        # session cookie you'd get from /admin/). It's the simplest
+        # option for now -- we'll add token-based auth (JWT) in a
+        # later lesson, once a frontend needs to talk to this API from
+        # a different origin.
         "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
+        # Now every endpoint requires SOME authenticated user by
+        # default -- unless a view explicitly says otherwise.
         "rest_framework.permissions.IsAuthenticated",
     ],
 }
+
+# THE swap. This one setting is what tells Django "use our User, not
+# the built-in one" -- and it's the setting that must be decided
+# before the first migration, for the reason explained in accounts/models.py.
+AUTH_USER_MODEL = "accounts.User"

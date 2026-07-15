@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV 'C:\Users\sahil\Downloads\soori_tutorial\soori_tutorial\venv'
+set -gx VIRTUAL_ENV 'C:\Users\sahil\Documents\SOORI_Internship\Projects\soori_tutorial\venv'
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"Scripts $PATH

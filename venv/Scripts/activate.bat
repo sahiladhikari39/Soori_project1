@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=C:\Users\sahil\Downloads\soori_tutorial\soori_tutorial\venv"
+set "VIRTUAL_ENV=C:\Users\sahil\Documents\SOORI_Internship\Projects\soori_tutorial\venv"
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -1,16 +1,29 @@
 from rest_framework import serializers
 
-from .models import Ticket
+from .models import Ticket, TicketComment
+
+
+class TicketCommentSerializer(serializers.ModelSerializer):
+    author_username = serializers.CharField(source="author.username", read_only=True)
+
+    class Meta:
+        model = TicketComment
+        fields = ["id", "ticket", "author", "author_username", "body", "is_internal_note", "created_at"]
+        read_only_fields = ["author"]
 
 
 class TicketSerializer(serializers.ModelSerializer):
     client_name = serializers.CharField(source="client.name", read_only=True)
     created_by_username = serializers.CharField(source="created_by.username", read_only=True)
+    assigned_to_username = serializers.CharField(source="assigned_to.username", read_only=True, default=None)
+    comments = TicketCommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Ticket
         fields = [
-            "id", "client", "client_name", "title", "description",
-            "created_by", "created_by_username", "created_at",
+            "id", "client", "client_name", "title", "description", "product_or_service",
+            "status", "priority", "created_by", "created_by_username",
+            "assigned_to", "assigned_to_username",
+            "created_at", "updated_at", "comments",
         ]
         read_only_fields = ["created_by", "client"]
